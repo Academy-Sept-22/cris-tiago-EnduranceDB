@@ -4,6 +4,7 @@ import com.endurance.db.DBConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBDumper {
@@ -11,7 +12,7 @@ public class DBDumper {
     public void dumpDatabase() throws Exception {
 
         try (Connection connection = DBConnection.createConnection("localhost", 3306,
-                "endurance", "root", "secret")) {
+                "endurance", "root", "password")) {
 
             dumpCountry(connection);
 
@@ -19,15 +20,25 @@ public class DBDumper {
 
     }
 
-    private void dumpCountry(Connection connection) throws Exception{
+    private void dumpCountry(Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
         String sql = ("SELECT * FROM endurance.Country;");
         ResultSet result = statement.executeQuery(sql);
-        System.out.println("Country Table:");
-        System.out.println("Name:");
+        System.out.println("Country Taxes:");
         while (result.next()) {
             String countryValue = result.getString("Name");
             System.out.println(countryValue);
+            dumpTaxesFor(connection, countryValue);
+        }
+    }
+
+    private void dumpTaxesFor(Connection connection, String country) throws SQLException {
+        Statement statement = connection.createStatement();
+        String sql = ("SELECT * FROM endurance.Tax WHERE Tax_country_name = '" + country + "';");
+        ResultSet result = statement.executeQuery(sql);
+        while (result.next()) {
+            int taxValue = result.getInt("value");
+            System.out.println("\t"+ taxValue);
         }
     }
 
