@@ -2,27 +2,36 @@ package com.endurance;
 
 import com.endurance.db.DBConnection;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DBDumper {
 
     public void dumpDatabase() throws Exception {
 
         try (Connection connection = DBConnection.createConnection("localhost", 3306,
-                "endurance", "root", "password")) {
+                "endurance", "root", "secret")) {
 
             dumpCountry(connection);
+            dumpProjects(connection);
 
         }
 
     }
 
+    private void dumpProjects(Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        String sql = ("SELECT * FROM Project;");
+        ResultSet result = statement.executeQuery(sql);
+        System.out.println("Projects:");
+        while (result.next()) {
+            String projectName = result.getString("Name");
+            System.out.println(projectName);
+        }
+    }
+
     private void dumpCountry(Connection connection) throws SQLException {
         Statement statement = connection.createStatement();
-        String sql = ("SELECT * FROM endurance.Country;");
+        String sql = ("SELECT * FROM Country;");
         ResultSet result = statement.executeQuery(sql);
         System.out.println("Country Taxes:");
         while (result.next()) {
@@ -33,9 +42,10 @@ public class DBDumper {
     }
 
     private void dumpTaxesFor(Connection connection, String country) throws SQLException {
-        Statement statement = connection.createStatement();
-        String sql = ("SELECT * FROM endurance.Tax WHERE Tax_country_name = '" + country + "';");
-        ResultSet result = statement.executeQuery(sql);
+        String sql = ("SELECT * FROM endurance.Tax WHERE Tax_country_name = ?" );
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, country);
+        ResultSet result = statement.executeQuery();
         while (result.next()) {
             int taxValue = result.getInt("value");
             System.out.println("\t"+ taxValue);
