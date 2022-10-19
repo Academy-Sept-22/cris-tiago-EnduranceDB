@@ -1,19 +1,12 @@
 package com.endurance;
 
-import org.mockito.BDDMockito;
-
+import java.sql.SQLException;
 import java.util.Collection;
 
-public class ProjectRepository {
-    public Project addProject(Project project) {
-        throw new UnsupportedOperationException();
-    }
+public interface ProjectRepository {
+    Project addProject(Project project);
 
-    public Collection<Project> getAllProjects() {
-        throw new UnsupportedOperationException();
-    }
+    Collection<Project> getAllProjects();
 
-    public Project getProjectByID(int id) {
-        throw new UnsupportedOperationException();
-    }
+    Project getProjectByID(int id);
 }

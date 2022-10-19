@@ -1,5 +1,6 @@
 package com.endurance;
 
+import com.endurance.db.InMemoryProjectRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ProjectAcceptanceShould {
     @Test
     public void create_and_list_projects() {
-        ProjectController projectController = new ProjectController(new ProjectRepository());
+        ProjectController projectController =
+                new ProjectController(new InMemoryProjectRepository());
         Project newProject = projectController.createProject("Project", "UK");
         Collection<Project> projects = projectController.getAllProjects();
 

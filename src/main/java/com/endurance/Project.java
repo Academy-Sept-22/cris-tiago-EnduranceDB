@@ -4,7 +4,7 @@ public class Project {
 
     private final String name;
     private final String country;
-    private int id;
+    private int id = 0;
 
     public Project(String name, String country) {
         this.name = name;
