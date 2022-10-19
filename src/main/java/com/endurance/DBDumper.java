@@ -9,24 +9,28 @@ public class DBDumper {
     public void dumpDatabase() throws Exception {
 
         try (Connection connection = DBConnection.createConnection("localhost", 3306,
-                "endurance", "root", "secret")) {
+                "endurance", "root", "password")) {
 
             dumpCountry(connection);
             dumpProjects(connection);
-            //addProjects(connection);
+
+            //addProject(connection, "Project New", "Spain");
 
         }
 
     }
 
-    private void addProjects(Connection connection) throws SQLException {
-        String sql = ("INSERT INTO endurance.Project (Project_ID, Name, Project_country_name)\n" +
-                "VALUES (?, ?, ?);" );
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, "6");
-        statement.setString(2, "Project6");
-        statement.setString(3, "UK");
-        statement.execute();
+    private void addProject(Connection connection, String projectName, String projectCountry) throws SQLException {
+        String sql = ("INSERT INTO Project (Name, Project_country_name) VALUES (?, ?);" );
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, projectName);
+        statement.setString(2, projectCountry);
+        statement.executeUpdate();
+
+        ResultSet generatedKeysResult = statement.getGeneratedKeys();
+        generatedKeysResult.next();
+        int newKey = generatedKeysResult.getInt(1);
+        System.out.println("New project created with key=" + newKey);
     }
 
     private void dumpProjects(Connection connection) throws SQLException {
