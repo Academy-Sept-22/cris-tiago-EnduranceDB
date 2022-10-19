@@ -13,9 +13,20 @@ public class DBDumper {
 
             dumpCountry(connection);
             dumpProjects(connection);
+            //addProjects(connection);
 
         }
 
+    }
+
+    private void addProjects(Connection connection) throws SQLException {
+        String sql = ("INSERT INTO endurance.Project (Project_ID, Name, Project_country_name)\n" +
+                "VALUES (?, ?, ?);" );
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, "6");
+        statement.setString(2, "Project6");
+        statement.setString(3, "UK");
+        statement.execute();
     }
 
     private void dumpProjects(Connection connection) throws SQLException {
