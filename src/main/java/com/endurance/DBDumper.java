@@ -26,6 +26,19 @@ public class DBDumper {
         while (result.next()) {
             String projectName = result.getString("Name");
             System.out.println(projectName);
+            String projectID = result.getString("Project_ID");
+            dumpTasksFor(connection, projectID);
+        }
+    }
+
+    private void dumpTasksFor(Connection connection, String projectID) throws SQLException {
+        String sql = ("SELECT * FROM Task WHERE Task_project_ID = ?" );
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, projectID);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            String taskName = result.getString("Name");
+            System.out.println("\t"+ taskName);
         }
     }
 
@@ -42,7 +55,7 @@ public class DBDumper {
     }
 
     private void dumpTaxesFor(Connection connection, String country) throws SQLException {
-        String sql = ("SELECT * FROM endurance.Tax WHERE Tax_country_name = ?" );
+        String sql = ("SELECT * FROM Tax WHERE Tax_country_name = ?" );
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, country);
         ResultSet result = statement.executeQuery();
