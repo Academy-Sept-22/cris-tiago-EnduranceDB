@@ -2,14 +2,25 @@ package com.endurance;
 
 import com.endurance.db.DBConnection;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class DBDumper {
 
     public void dumpDatabase() throws Exception {
 
-        try (Connection connection = DBConnection.createConnection("localhost", 3306,
-                "endurance", "root", "password")) {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("AccessData.properties"));
+
+        String host = properties.getProperty("host");
+        int port = Integer.parseInt(properties.getProperty("port"));
+        String database = properties.getProperty("database");
+        String userName = properties.getProperty("user_name");
+        String userPassword = properties.getProperty("user_password");
+
+        try (Connection connection = DBConnection.createConnection(
+                host, port, database, userName, userPassword)) {
 
             dumpCountry(connection);
             dumpProjects(connection);
