@@ -2,14 +2,14 @@ package com.endurance.db;
 
 import com.endurance.Project;
 import com.endurance.ProjectRepository;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.Collection;
+import java.util.HashSet;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class MongoProjectRepository implements ProjectRepository {
     private MongoDatabase database;
@@ -38,11 +38,27 @@ public class MongoProjectRepository implements ProjectRepository {
 
     @Override
     public Collection<Project> getAllProjects() {
-        return null;
+        MongoCollection<Document> collection = database.getCollection("Projects");
+        FindIterable<Document> projectDocuments = collection.find();
+        HashSet<Project> projects = new HashSet<>();
+        for (Document projectDocument : projectDocuments) {
+            Object id = projectDocument.getObjectId("_id");
+            String projectName = projectDocument.getString("name");
+            String country = projectDocument.getString("country");
+            Project project = new Project(id, projectName, country);
+            projects.add(project);
+        }
+        return projects;
     }
 
     @Override
-    public Project getProjectByID(int id) {
-        return null;
+    public Project getProjectByID(Object id) {
+        MongoCollection<Document> collection = database.getCollection("Projects");
+        Document projectDocument = collection.find(eq("_id", id)).first();
+        Object documentId = projectDocument.getObjectId("_id");
+        String projectName = projectDocument.getString("name");
+        String country = projectDocument.getString("country");
+
+        return new Project(documentId, projectName, country);
     }
 }

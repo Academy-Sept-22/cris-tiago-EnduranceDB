@@ -7,7 +7,7 @@ import java.util.*;
 
 public class InMemoryProjectRepository implements ProjectRepository {
 
-    private final HashMap<Integer,Project> projects = new HashMap<>();
+    private final HashMap<Object,Project> projects = new HashMap<>();
 
     private final Random random = new Random();
 
@@ -25,7 +25,7 @@ public class InMemoryProjectRepository implements ProjectRepository {
     }
 
     @Override
-    public Project getProjectByID(int id) {
+    public Project getProjectByID(Object id) {
         return projects.get(id);
     }
 }

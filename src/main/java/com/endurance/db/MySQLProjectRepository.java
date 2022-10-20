@@ -70,11 +70,11 @@ public class MySQLProjectRepository implements ProjectRepository {
     }
 
     @Override
-    public Project getProjectByID(int id) {
+    public Project getProjectByID(Object id) {
         try {
             String sql = ("SELECT * FROM " + PROJECT_TABLE + " WHERE " + PROJECT_ID + " = ?;");
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
+            statement.setObject(1, id);
             ResultSet result = statement.executeQuery();
             result.next(); // expecting only one
             int projectID = result.getInt(PROJECT_ID);

@@ -20,7 +20,7 @@ public class ProjectController {
        return allProjects;
     }
 
-    public Project getProjectByID(int id) {
+    public Project getProjectByID(Object id) {
         Project project = projectRepository.getProjectByID(id);
         return project;
     }

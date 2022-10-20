@@ -8,5 +8,5 @@ public interface ProjectRepository {
 
     Collection<Project> getAllProjects();
 
-    Project getProjectByID(int id);
+    Project getProjectByID(Object id);
 }

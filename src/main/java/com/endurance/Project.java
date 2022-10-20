@@ -1,23 +1,25 @@
 package com.endurance;
 
+import java.util.Objects;
+
 public class Project {
 
     private final String name;
     private final String country;
-    private int id = 0;
+    private Object id = 0;
 
     public Project(String name, String country) {
         this.name = name;
         this.country = country;
     }
 
-    public Project(int id, String name, String country) {
+    public Project(Object id, String name, String country) {
         this.id = id;
         this.name = name;
         this.country = country;
     }
 
-    public int getID() {
+    public Object getID() {
         return id;
     }
 
@@ -36,16 +38,16 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (id != project.id) return false;
-        if (!name.equals(project.name)) return false;
-        return country.equals(project.country);
+        if (!Objects.equals(name, project.name)) return false;
+        if (!Objects.equals(country, project.country)) return false;
+        return Objects.equals(id, project.id);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + country.hashCode();
-        result = 31 * result + id;
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }
