@@ -1,4 +1,7 @@
-package com.endurance;
+package com.endurance.controllers;
+
+import com.endurance.db.repos.ProjectRepository;
+import com.endurance.entities.Project;
 
 import java.util.Collection;
 

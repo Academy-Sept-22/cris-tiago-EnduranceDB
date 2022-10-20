@@ -1,6 +1,4 @@
-package com.endurance;
-
-import com.endurance.db.DBConnection;
+package com.endurance.db.mysql;
 
 import java.io.FileInputStream;
 import java.sql.*;

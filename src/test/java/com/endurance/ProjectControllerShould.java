@@ -1,5 +1,8 @@
 package com.endurance;
 
+import com.endurance.controllers.ProjectController;
+import com.endurance.db.repos.ProjectRepository;
+import com.endurance.entities.Project;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

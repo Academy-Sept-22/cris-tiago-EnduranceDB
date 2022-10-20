@@ -1,4 +1,4 @@
-package com.endurance;
+package com.endurance.entities;
 
 import java.util.Objects;
 

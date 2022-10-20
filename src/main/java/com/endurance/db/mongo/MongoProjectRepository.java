@@ -1,7 +1,7 @@
-package com.endurance.db;
+package com.endurance.db.mongo;
 
-import com.endurance.Project;
-import com.endurance.ProjectRepository;
+import com.endurance.entities.Project;
+import com.endurance.db.repos.ProjectRepository;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;

@@ -1,7 +1,8 @@
 package com.endurance;
 
-import com.endurance.db.InMemoryProjectRepository;
-import org.junit.jupiter.api.Assertions;
+import com.endurance.controllers.ProjectController;
+import com.endurance.db.test.InMemoryProjectRepository;
+import com.endurance.entities.Project;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;

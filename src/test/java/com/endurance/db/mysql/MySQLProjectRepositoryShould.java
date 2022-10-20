@@ -1,12 +1,8 @@
-package com.endurance.db;
+package com.endurance.db.mysql;
 
-import com.endurance.Project;
-import com.endurance.ProjectRepository;
+import com.endurance.db.repos.ProjectRepositoryShould;
+import com.endurance.db.repos.ProjectRepository;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collection;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class MySQLProjectRepositoryShould extends ProjectRepositoryShould {
 

@@ -1,6 +1,7 @@
-package com.endurance;
+package com.endurance.db.repos;
 
-import java.sql.SQLException;
+import com.endurance.entities.Project;
+
 import java.util.Collection;
 
 public interface ProjectRepository {

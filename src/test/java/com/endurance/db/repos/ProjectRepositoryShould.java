@@ -1,7 +1,6 @@
-package com.endurance.db;
+package com.endurance.db.repos;
 
-import com.endurance.Project;
-import com.endurance.ProjectRepository;
+import com.endurance.entities.Project;
 
 import java.util.Collection;
 

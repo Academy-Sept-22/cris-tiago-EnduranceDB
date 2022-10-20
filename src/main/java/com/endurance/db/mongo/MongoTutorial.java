@@ -1,4 +1,4 @@
-package com.endurance.db;
+package com.endurance.db.mongo;
 
 
 import com.mongodb.client.*;
