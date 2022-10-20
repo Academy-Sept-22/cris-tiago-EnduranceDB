@@ -1,6 +1,8 @@
 package com.endurance.db.repos;
 
+import com.endurance.entities.ComplexityFactor;
 import com.endurance.entities.Project;
+import com.endurance.entities.Task;
 
 import java.util.Collection;
 
@@ -20,5 +22,23 @@ public class ProjectRepositoryShould {
         Collection<Project> projects = repository.getAllProjects();
 
         assertTrue(projects.contains(projectCreated));
+
+        projectQueried.addTask(new Task("Task1", 5, ComplexityFactor.MINIMUM));
+
+        repository.updateProject(projectQueried);
+
+        Project projectUpdatedWithTasks = repository.getProjectByID(projectCreated.getID());
+
+        assertEquals(projectQueried, projectUpdatedWithTasks);
+
+        Project newProjectWithTasks = new Project("ProjectTest1", "UK");
+        newProjectWithTasks.addTask(new Task("Task1", 5, ComplexityFactor.MINIMUM));
+
+        Project projectCreatedWithTasks = repository.addProject(newProjectWithTasks);
+
+        Project projectCreatedWithTasksInDB = repository.getProjectByID(projectCreatedWithTasks.getID());
+
+        assertEquals(projectCreatedWithTasks, projectCreatedWithTasksInDB);
+
     }
 }

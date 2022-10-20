@@ -85,4 +85,9 @@ public class MySQLProjectRepository implements ProjectRepository {
             throw new RuntimeException("Error adding project", sqlException);
         }
     }
+
+    @Override
+    public void updateProject(Project project) {
+        throw new UnsupportedOperationException();
+    }
 }

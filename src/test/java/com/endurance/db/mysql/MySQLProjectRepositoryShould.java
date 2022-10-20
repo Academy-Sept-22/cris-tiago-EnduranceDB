@@ -19,7 +19,7 @@ public class MySQLProjectRepositoryShould extends ProjectRepositoryShould {
     protected ProjectRepository createProjectRepository() throws Exception {
         ProjectRepository repository =
                 MySQLProjectRepository.create("localhost", 3306,
-                        "Endurance_test", "root", "secret");
+                        "Endurance_test", "root", "password");
         return repository;
     }
 

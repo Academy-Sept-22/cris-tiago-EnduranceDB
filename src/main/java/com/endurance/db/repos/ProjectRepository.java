@@ -10,4 +10,6 @@ public interface ProjectRepository {
     Collection<Project> getAllProjects();
 
     Project getProjectByID(Object id);
+
+    void updateProject(Project project);
 }

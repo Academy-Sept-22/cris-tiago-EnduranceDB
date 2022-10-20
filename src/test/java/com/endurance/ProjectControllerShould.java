@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
 public class ProjectControllerShould {
@@ -60,5 +61,15 @@ public class ProjectControllerShould {
         Project project = projectController.getProjectByID(1);
 
         assertEquals(projectWithID, project);
+    }
+
+    @Test
+    void update_project() {
+
+        Project projectWithID = new Project(1,"Project", "UK");
+
+        projectController.updateProject(projectWithID);
+
+        then(projectRepository).should().updateProject(projectWithID);
     }
 }

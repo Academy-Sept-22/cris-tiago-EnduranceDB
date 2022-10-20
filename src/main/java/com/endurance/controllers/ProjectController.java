@@ -27,4 +27,8 @@ public class ProjectController {
         Project project = projectRepository.getProjectByID(id);
         return project;
     }
+
+    public void updateProject(Project project) {
+       projectRepository.updateProject(project);
+    }
 }

@@ -1,12 +1,17 @@
 package com.endurance.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Project {
 
-    private final String name;
-    private final String country;
+    private String name;
+    private String country;
     private Object id = 0;
+
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public Project(String name, String country) {
         this.name = name;
@@ -31,6 +36,14 @@ public class Project {
         return country;
     }
 
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public Collection<Task> getTasks() {
+        return Collections.unmodifiableCollection(tasks);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,7 +53,8 @@ public class Project {
 
         if (!Objects.equals(name, project.name)) return false;
         if (!Objects.equals(country, project.country)) return false;
-        return Objects.equals(id, project.id);
+        if (!Objects.equals(id, project.id)) return false;
+        return Objects.equals(tasks, project.tasks);
     }
 
     @Override
@@ -48,6 +62,26 @@ public class Project {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (country != null ? country.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
         return result;
+    }
+
+    public void copyFrom(Project project) {
+        this.name = project.name;
+        this.country = project.country;
+        this.tasks = new ArrayList<>();
+        for (Task task: project.tasks) {
+            this.tasks.add(new Task(task));
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", id=" + id +
+                ", tasks=" + tasks +
+                '}';
     }
 }
