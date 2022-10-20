@@ -16,7 +16,7 @@ public class MySQLProjectRepositoryShould {
 
         MySQLProjectRepository mySQLProjectRepository =
                 MySQLProjectRepository.create("localhost", 3306,
-                        "Endurance_test", "root", "password");
+                        "Endurance_test", "root", "secret");
 
         Project projectCreated = mySQLProjectRepository.addProject(
                 new Project("ProjectTest1", "UK"));
