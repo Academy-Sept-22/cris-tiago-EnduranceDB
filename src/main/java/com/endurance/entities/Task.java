@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Task {
 
+    private Object id;
+
     private String name;
 
     private Integer estimatedCost;
@@ -20,6 +22,18 @@ public class Task {
         this.name = task.name;
         this.estimatedCost = task.estimatedCost;
         this.complexityFactor = task.complexityFactor;
+    }
+
+    public Task(Object id, Task task) {
+        this(task);
+        this.id = id;
+    }
+
+    public Task(Object taskId, String taskName, int estimatedCost, ComplexityFactor complexityFactor) {
+        id = taskId;
+        name = taskName;
+        this.estimatedCost = estimatedCost;
+        this.complexityFactor = complexityFactor;
     }
 
     public Integer getEstimatedCost() {
@@ -41,6 +55,7 @@ public class Task {
 
         Task task = (Task) o;
 
+        if (!Objects.equals(id, task.id)) return false;
         if (!Objects.equals(name, task.name)) return false;
         if (!Objects.equals(estimatedCost, task.estimatedCost))
             return false;
@@ -50,6 +65,7 @@ public class Task {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + (estimatedCost != null ? estimatedCost.hashCode() : 0);
         result = 31 * result + (complexityFactor != null ? complexityFactor.hashCode() : 0);
         return result;
@@ -58,7 +74,8 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "name='" + name + '\'' +
+                " id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", estimatedCost=" + estimatedCost +
                 ", complexityFactor=" + complexityFactor +
                 '}';

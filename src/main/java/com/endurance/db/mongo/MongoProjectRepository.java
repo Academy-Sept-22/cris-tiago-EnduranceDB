@@ -66,9 +66,10 @@ public class MongoProjectRepository implements ProjectRepository {
     }
 
     @Override
-    public void updateProject(Project project) {
+    public Project updateProject(Project project) {
         Document document = convertProjectToDocument(project);
         collection.replaceOne(Filters.eq("_id", project.getID()), document);
+        return project;
     }
 
     private static Document convertProjectToDocument(Project project) {

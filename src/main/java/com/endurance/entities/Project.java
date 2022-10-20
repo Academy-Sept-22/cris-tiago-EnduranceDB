@@ -1,9 +1,6 @@
 package com.endurance.entities;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 public class Project {
 
@@ -16,6 +13,12 @@ public class Project {
     public Project(String name, String country) {
         this.name = name;
         this.country = country;
+    }
+
+    public Project(String name, String country, List<Task> tasks) {
+        this.name = name;
+        this.country = country;
+        this.tasks.addAll(tasks);
     }
 
     public Project(Object id, String name, String country) {
@@ -44,6 +47,12 @@ public class Project {
         return Collections.unmodifiableCollection(tasks);
     }
 
+    public void copyFrom(Project project) {
+        this.name = project.name;
+        this.country = project.country;
+        this.tasks = new ArrayList<>(project.getTasks());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,15 +73,6 @@ public class Project {
         result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
         return result;
-    }
-
-    public void copyFrom(Project project) {
-        this.name = project.name;
-        this.country = project.country;
-        this.tasks = new ArrayList<>();
-        for (Task task: project.tasks) {
-            this.tasks.add(new Task(task));
-        }
     }
 
     @Override

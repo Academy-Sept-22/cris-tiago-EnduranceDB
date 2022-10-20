@@ -15,4 +15,5 @@ public enum ComplexityFactor {
         }
         throw new IllegalArgumentException(value);
     }
+
 }

@@ -11,5 +11,5 @@ public interface ProjectRepository {
 
     Project getProjectByID(Object id);
 
-    void updateProject(Project project);
+    Project updateProject(Project project);
 }

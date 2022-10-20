@@ -25,10 +25,11 @@ public class ProjectRepositoryShould {
 
         projectQueried.addTask(new Task("Task1", 5, ComplexityFactor.MINIMUM));
 
-        repository.updateProject(projectQueried);
+        Project projectReturnedFromUpdate = repository.updateProject(projectQueried);
 
         Project projectUpdatedWithTasks = repository.getProjectByID(projectCreated.getID());
 
+        assertEquals(projectUpdatedWithTasks, projectReturnedFromUpdate);
         assertEquals(projectQueried, projectUpdatedWithTasks);
 
         Project newProjectWithTasks = new Project("ProjectTest1", "UK");

@@ -30,8 +30,9 @@ public class InMemoryProjectRepository implements ProjectRepository {
     }
 
     @Override
-    public void updateProject(Project project) {
+    public Project updateProject(Project project) {
         Project projectInMemory = projects.get(project.getID());
         projectInMemory.copyFrom(project);
+        return project;
     }
 }
